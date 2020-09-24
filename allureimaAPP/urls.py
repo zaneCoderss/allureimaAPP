@@ -22,10 +22,13 @@ urlpatterns = [
 
     # Auth
     path('signup/', views.signupuser, name = "signupuser"),
+    path('login/', views.loginuser, name = "loginuser"),
+
     path('logout/', views.logoutuser, name = "logoutuser"),
 
 
     # User Home Page i.e. page they land on right after signing up
+    path('', views.home, name = "home"),
     path('uhome/', views.userhome, name = "userhome")
 
 ]
