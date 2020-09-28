@@ -1,0 +1,18 @@
+{% extends 'app1/base.html' %}
+
+{% block content %}
+
+
+<h1>Allure Institute of Makeup Artistry</h1>
+<br>
+<h2>Create a To-Do</h2>
+
+<h3>{{ Error }}</h3>
+
+<form method="POST">
+  {% csrf_token %}
+{{ form.as_p }}
+<button type='submit'> Save </button>
+</form>
+
+{% endblock %}

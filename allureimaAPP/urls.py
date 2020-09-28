@@ -29,6 +29,14 @@ urlpatterns = [
 
     # User Home Page i.e. page they land on right after signing up
     path('', views.home, name = "home"),
-    path('uhome/', views.userhome, name = "userhome")
+    path('addTodo', views.addTodo, name = "addTodo"),
+    path('uhome/', views.userhome, name = "userhome"),
+    path('todo/<int:todo_pk>', views.viewtodo, name = "viewtodo"),
+    path('todo/<int:todo_pk>/complete', views.completetodo, name = "completetodo"),
+    path('todo/<int:todo_pk>/delete', views.deletetodo, name = "deletetodo"),
+    path('completedtodos/', views.completedtodos, name = "completedtodos"),
+
+
+
 
 ]
