@@ -1,0 +1,80 @@
+{% extends 'app1/sofiebase.html' %}
+
+{% block content %}
+
+<h1><b><u>sofie</u></b></h1>
+<br>
+<p>
+<!-- Here's the Full Summary for <b>{{ ticker }}</b> (as of <u>{{ dateTime }}</u> )
+<br>
+<br>
+  - <b>Current Price</b>: ${{ current }}
+<br>
+  - <b>Opening Price</b>: ${{ stockopen }}
+<br>
+  - <b>Previous Close</b>: ${{ prevClose }}
+<br>
+<br>
+  - <b>Volume</b>: ${{ vol }}
+<br>
+  - <b>Average Volume</b>: ${{ avgVol }}
+<br>
+<br>
+  - <b>Day Low</b>: ${{ dl }}
+<br>
+  - <b>Day High</b>: ${{ dh }}
+<br>
+  - <b>Year Low</b>: ${{ yl }}
+<br>
+  - <b>Year High</b>: ${{ yh }}
+<br>
+<br>
+  - <b>50 Day Average Price</b>: ${{ 50da }}
+<br>
+  - <b>200 Day Avearge Price</b>: ${{ 200da }}
+<br>
+<br>
+  - <b>Market Cap</b>: ${{ mkcp }}
+<br>
+  - <b>PE Ratio</b>: {{ pe }}
+<br>
+  - <b>EPS</b>:{{ eps }}
+<br>
+  - <b>Outstanding Shares</b>: {{ shares }}
+<br>
+<br> -->
+<br>
+<br>
+<br>
+<div class="row justify-content-center mt-15">
+    <div class="col-md-13 text-center">
+
+<div id="stock_summary"> {{ df | safe }} </div>
+<br>
+<br>
+<h2> Try another symbol: </h2>
+<form action="stocksumm">
+  Enter a ticker symbol (Ex. {{eg}}): <input type="text" name="symbol">
+  <input type="submit">
+
+  </div>
+  </div>
+
+
+
+          <!-- "\nPrevious close: $"+previousClose+
+          "\n \nVolume: "+volume+
+          "\nAverage Volume: "+avgVolume+
+          "\n \nDay Low: $"+dayLow+
+          "\nDay High: $"+dayHigh+
+          "\nYear Low: $"+yearLow+
+          "\nYear High: $"+yearHigh+
+          "\n \n50-day Average Price: $"+avg50+
+          "\n200-day Average Price: $"+avg200+
+          "\n \nMarket Cap :$"+mrktCap+
+          "\nP/E Ratio: "+pe+
+          "\nEPS: "+eps+
+          #"\nNext Earnings Announcement: "+earnAnnounce+
+          "\nTotal Number of Outstanding Shares: "+outstandingShares) -->
+</p>
+{% endblock %}

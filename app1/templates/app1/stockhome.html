@@ -1,0 +1,27 @@
+{% extends 'app1/sofiebase.html' %}
+
+{% block content %}
+
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+
+                 <h1>Welcome to <b>sofie</b></h1>
+                 <br>
+            <p>Helping make <u>trading and investing</u> fun!
+              <br>
+              <b><i>Let's get started!</i></b>
+              <br>
+              <form action="stocksumm">
+                Enter a ticker symbol (Ex. {{eg}}): <input type="text" name="symbol">
+                <input type="submit">
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -35,6 +35,13 @@ urlpatterns = [
     path('todo/<int:todo_pk>/complete', views.completetodo, name = "completetodo"),
     path('todo/<int:todo_pk>/delete', views.deletetodo, name = "deletetodo"),
     path('completedtodos/', views.completedtodos, name = "completedtodos"),
+    path('sofie/', views.sofie, name = "sofie"),
+    path('stock/', views.stockhome, name = "stockhome"),
+    path('stock/stocksumm/', views.stocksumm, name = "stocksumm"),
+    path('stock/stocksummtab/', views.stocksummtab, name = "stocksummtab"),
+
+
+
 
 
 
