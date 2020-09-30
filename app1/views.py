@@ -30,6 +30,7 @@ from IPython.display import display, HTML
 
 
 
+
 # Create your views here.
 def home(request):
     return render(request, 'app1/home.html')
@@ -281,3 +282,52 @@ def stocksumm(request):
     #     "shares":outstandingShares,
     #     "df":df
     #             })
+
+@login_required
+def getchart(request):
+    symbolInput = request.GET['symbol']
+    timeInt = request.GET['interval']
+    rangeInput = request.GET['range']
+
+    url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-charts"
+
+    querystring = {"region": "US",
+               "symbol": symbolInput, "interval": timeInt, "range": rangeInput}
+    headers = {
+        'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com",
+        'x-rapidapi-key': "e1608636d9msh8918cbfa46ffe42p118d48jsn816a911904ed"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring).text
+    a = json.loads(response)
+
+    b = a["chart"]["result"][0]["timestamp"]
+    c = pd.DataFrame(b, columns=["Date"])
+    c = c[c['Date'].notna()]
+    #c["a"] = c["a"].astype(int)
+    #c["new"] = pd.Timestamp(c["Date and Time"],unit='s')
+    #d=c["Date and Time"][0]#].to_pydatetime()
+    #e = pd.Timestamp(d, unit='s',tz="America/Los_Angeles")
+
+    c.Date = c.Date.apply(
+        lambda x: datetime.fromtimestamp(x,pytz.timezone('America/New_York')).strftime('%Y-%m-%d %H:%M:%S') )
+
+    c["Open"] = a["chart"]["result"][0]["indicators"]["quote"][0]['open']
+    c["High"] = a["chart"]["result"][0]["indicators"]["quote"][0]['high']
+    c["Low"] = a["chart"]["result"][0]["indicators"]["quote"][0]['low']
+    c["Close"] = a["chart"]["result"][0]["indicators"]["quote"][0]['close']
+    c["Volume"] = a["chart"]["result"][0]["indicators"]["quote"][0]['volume']
+
+    c["Date"] = pd.to_datetime(c["Date"])
+    d = c.sort_values('Date', ascending=True)
+
+    tick_spacing = len(d.Open)/10
+
+    fig, ax = plt.subplots(1,1)
+    ax.plot(d.Date,d.Close)
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
+    plt.xticks(rotation=90)
+    plt.savefig('/Users/hs/desktop/allureimaAPP-project/pic.png')
+    # c.plot(x='Date_and_Time',y='open',kind='scatter')
+    # plt.show()
+    return render(request, "app1/getchart.html",{"c": fig})

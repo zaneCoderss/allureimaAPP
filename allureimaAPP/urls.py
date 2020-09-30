@@ -38,7 +38,7 @@ urlpatterns = [
     path('sofie/', views.sofie, name = "sofie"),
     path('stock/', views.stockhome, name = "stockhome"),
     path('stock/stocksumm/', views.stocksumm, name = "stocksumm"),
-    path('stock/stocksummtab/', views.stocksummtab, name = "stocksummtab"),
+    path('stock/getchart/', views.getchart, name = "getchart"),
 
 
 
